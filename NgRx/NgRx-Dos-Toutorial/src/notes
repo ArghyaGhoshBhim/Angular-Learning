@@ -1,0 +1,33 @@
+Link:https://ngrx.io/guide/store
+
+What is NgRx?
+NgRx is a framework for building reactive applications in Angular. NgRx provides libraries for:
+
+Managing global and local state.
+Isolation of side effects to promote a cleaner component architecture.
+Entity collection management.
+Integration with the Angular Router.
+Developer tooling that enhances developer experience when building many different types of applications.
+
+---
+
+Packages:-
+NgRx packages are divided into a few main categories
+
+1.State
+Store - RxJS powered global state management for Angular apps, inspired by Redux.
+Effects - Side effect model for @ngrx/store.
+Router Store - Bindings to connect the Angular Router to @ngrx/store.
+Entity - Entity State adapter for managing record collections.
+ComponentStore - Standalone library for managing local/component state.
+2.Data
+Data - Extension for simplified entity data management.
+3.View
+Component - Extension for building reactive Angular templates.
+
+---
+
+@ngrx/store
+Store is RxJS powered global state management for Angular applications, inspired by Redux. Store is a controlled state container designed to help write performant, consistent applications on top of Angular.
+
+---
