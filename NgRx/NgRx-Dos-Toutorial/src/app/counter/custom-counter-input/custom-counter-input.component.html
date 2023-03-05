@@ -1,0 +1,14 @@
+<h1>Custom Counter Input</h1>
+<br />
+<div class="container">
+  <h3>{{ channelName }}</h3>
+  <br />
+  <div class="input-group">
+    <input type="number" class="form-control" [(ngModel)]="value" />
+    <button class="btn btn-primary" (click)="addCount()">Add in counter</button>
+  </div>
+  <br />
+  <button class="btn btn-success" (click)="changeChannelName()">
+    Change Channel
+  </button>
+</div>

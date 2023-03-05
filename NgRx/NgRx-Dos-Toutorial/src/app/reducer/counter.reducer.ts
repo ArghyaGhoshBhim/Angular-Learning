@@ -1,4 +1,3 @@
-import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
 import {
   changeChannelName,
@@ -6,8 +5,8 @@ import {
   decrement,
   increment,
   reset,
-} from './counter.actions';
-import { initialState } from './Counter.state';
+} from '../actions/counter.actions';
+import { initialState } from '../state/Counter.state';
 
 export const countReducer = createReducer(
   initialState,

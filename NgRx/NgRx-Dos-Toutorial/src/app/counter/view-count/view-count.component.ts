@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { CounterState } from '../Counter.state';
+import { getCounter } from '../../state/counter.selectors';
+import { CounterState } from '../../state/Counter.state';
 
 @Component({
   selector: 'app-view-count',
@@ -9,14 +10,24 @@ import { CounterState } from '../Counter.state';
 })
 export class ViewCountComponent implements OnInit {
   countValue!: number;
-  count$: Observable<{ counter: number }>;
+
+  //111
+  //count$: Observable<{ counter: number }>;
   constructor(private store: Store<{ count: CounterState }>) {
-    this.count$ = store.select('count');
+    //111
+    //this.count$ = store.select('count');
   }
   ngOnInit(): void {
-    this.count$.subscribe((data) => {
+    //111
+    /**
+     this.count$.subscribe((data) => {
       console.log('Counter in view-count also called');
       this.countValue = data.counter;
+    });
+     */
+    this.store.select(getCounter).subscribe((data) => {
+      console.log('Counter in view-count also called');
+      this.countValue = data;
     });
   }
 }
