@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormArray } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CounterState } from '../Counter.state';
@@ -8,9 +7,16 @@ import { CounterState } from '../Counter.state';
   selector: 'app-view-count',
   templateUrl: './view-count.component.html',
 })
-export class ViewCountComponent {
+export class ViewCountComponent implements OnInit {
+  countValue!: number;
   count$: Observable<{ counter: number }>;
   constructor(private store: Store<{ count: CounterState }>) {
     this.count$ = store.select('count');
+  }
+  ngOnInit(): void {
+    this.count$.subscribe((data) => {
+      console.log('Counter in view-count also called');
+      this.countValue = data.counter;
+    });
   }
 }

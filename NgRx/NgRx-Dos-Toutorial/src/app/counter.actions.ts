@@ -7,3 +7,5 @@ export const customCounterIncreament = createAction(
   'customincreamentcounter',
   props<{ value: number }>()
 );
+
+export const changeChannelName = createAction('changechannelname');
