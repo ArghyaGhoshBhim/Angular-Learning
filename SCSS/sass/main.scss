@@ -1,0 +1,13 @@
+$primary-color: rgb(42, 171, 42);
+$danger-color: rgb(215, 8, 8);
+$text-color: #ffff;
+$font-weights: (
+  "regular": 400,
+  "medium": 500,
+  "bold": 700,
+);
+body {
+  background-color: $primary-color;
+  font-weight: map-get($font-weights, bold);
+  color: $text-color;
+}
