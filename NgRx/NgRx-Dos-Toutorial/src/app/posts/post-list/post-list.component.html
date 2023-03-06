@@ -11,12 +11,21 @@
         <th>Id</th>
         <th>Title</th>
         <th>Description</th>
+        <th>Edit</th>
       </thead>
       <tbody>
         <tr *ngFor="let post of postData">
           <td>{{ post.id }}</td>
           <td>{{ post.title }}</td>
           <td>{{ post.description }}</td>
+          <td>
+            <button
+              class="btn btn-sm btn-primary"
+              [routerLink]="['edit', post.id]"
+            >
+              update
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

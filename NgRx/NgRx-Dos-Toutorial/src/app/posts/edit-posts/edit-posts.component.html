@@ -1,0 +1,27 @@
+<div class="row my-3">
+  <div class="col-md-12">
+    <h2>Update Posts</h2>
+    <hr />
+    <form [formGroup]="updateForm" (ngSubmit)="updatePost()">
+      <div class="mb-3">
+        <label>Title:</label>
+        <input type="text" class="form-control" formControlName="title" />
+        <div style="color: red">{{ titleShowErrorMessage() }}</div>
+      </div>
+      <div class="mb-3">
+        <label>Description:</label>
+        <textarea class="form-control" formControlName="description"></textarea>
+        <div style="color: red">{{ descriptionShowErrorMessage() }}</div>
+      </div>
+      <div class="mb-3">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!updateForm.valid"
+        >
+          Update
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
