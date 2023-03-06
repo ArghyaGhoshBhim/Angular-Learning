@@ -4,7 +4,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { countReducer } from './reducer/counter.reducer';
+import { countReducer } from './counter/reducer/counter.reducer';
 import { CounterComponent } from './counter/counter.component';
 import { ViewCountComponent } from './counter/view-count/view-count.component';
 import { CustomCounterInputComponent } from './counter/custom-counter-input/custom-counter-input.component';
@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appReducer } from './store/app.state';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    StoreModule.forRoot({ count: countReducer }),
+    StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({
       logOnly: !isDevMode(), // Restrict extension to log-only mode
     }),

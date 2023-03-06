@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getCounter } from '../../state/counter.selectors';
-import { CounterState } from '../../state/Counter.state';
+import { getCounter } from '../state/counter.selectors';
+import { CounterState } from '../state/Counter.state';
 
 @Component({
   selector: 'app-view-count',
@@ -26,7 +26,7 @@ export class ViewCountComponent implements OnInit {
     });
      */
     this.store.select(getCounter).subscribe((data) => {
-      console.log('Counter in view-count also called');
+      console.log('Counter in view-count also called: ', data);
       this.countValue = data;
     });
   }
