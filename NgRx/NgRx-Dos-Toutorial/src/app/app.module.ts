@@ -16,7 +16,9 @@ import { appReducer } from './store/app.state';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(appReducer),
+
+    //StoreModule.forRoot(appReducer),
+    StoreModule.forRoot({}), //to lazy load the store.
     StoreDevtoolsModule.instrument({
       logOnly: !isDevMode(), // Restrict extension to log-only mode
     }),
