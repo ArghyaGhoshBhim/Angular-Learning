@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 
@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,9 @@ import { PostListComponent } from './posts/post-list/post-list.component';
     AppRoutingModule,
     FormsModule,
     StoreModule.forRoot({ count: countReducer }),
+    StoreDevtoolsModule.instrument({
+      logOnly: !isDevMode(), // Restrict extension to log-only mode
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
