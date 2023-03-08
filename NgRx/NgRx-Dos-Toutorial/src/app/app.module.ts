@@ -7,7 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { appReducer } from './store/app.state';
+import { HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, HeaderComponent],
@@ -15,8 +16,9 @@ import { appReducer } from './store/app.state';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
-
+    EffectsModule.forRoot([]),
     //StoreModule.forRoot(appReducer),
     StoreModule.forRoot({}), //to lazy load the store.
     StoreDevtoolsModule.instrument({
