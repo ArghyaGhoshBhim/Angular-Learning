@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { setLoadingSpinnerAction } from 'src/app/store/Shared/shared.action';
+import {
+  setErrorAction,
+  setLoadingSpinnerAction,
+} from 'src/app/store/Shared/shared.action';
+import { getErrorMessage } from 'src/app/store/Shared/shared.selector';
 import { loginStartAction } from '../store/auth.action';
 
 @Component({
@@ -10,9 +14,12 @@ import { loginStartAction } from '../store/auth.action';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
   constructor(private store: Store<AppState>) {}
+  ngOnDestroy(): void {
+    this.store.dispatch(setErrorAction({ message: '' }));
+  }
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       userName: new FormControl(null, [Validators.required, Validators.email]),
