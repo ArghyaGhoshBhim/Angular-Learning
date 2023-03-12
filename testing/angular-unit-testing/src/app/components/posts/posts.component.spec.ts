@@ -1,10 +1,11 @@
+import { of } from 'rxjs';
 import { Post } from 'src/app/models/Post';
 import { PostService } from 'src/app/services/Post/post.service';
 import { PostsComponent } from './posts.component';
 
 describe('PostsComponent', () => {
-  let POSTS: Post[];
-  let mockPostService: PostService;
+  let POSTS: any;
+  let mockPostService: any;
   let postsComponent: PostsComponent;
 
   beforeEach(() => {
@@ -26,15 +27,31 @@ describe('PostsComponent', () => {
       },
     ];
 
-    mockPostService = jasmine.createSpyObj(['getPosts', 'deletePost']);
+    mockPostService = jasmine.createSpyObj('PostService', [
+      'getPosts',
+      'deletePost',
+    ]);
     postsComponent = new PostsComponent(mockPostService);
   });
 
-  describe('delete method', () => {
+  describe('delete', () => {
+    beforeEach(() => {
+      mockPostService.deletePost.and.returnValue(of(true));
+      postsComponent.posts = POSTS;
+    });
     it('should delete the selected Post from POSTS', () => {
-      let post = POSTS[1];
-      postsComponent.deletePost(post);
+      postsComponent.deletePost(POSTS[1]);
       expect(postsComponent.posts.length).toBe(2);
+    });
+    it('should call the delete method in Post Service only once', () => {
+      postsComponent.deletePost(POSTS[1]);
+      expect(mockPostService.deletePost).toHaveBeenCalledTimes(1);
+    });
+    it('should delete the actual Post from posts', () => {
+      postsComponent.deletePost(POSTS[1]);
+      for (let post in postsComponent.posts) {
+        expect(post).not.toEqual(POSTS[1]);
+      }
     });
   });
 });
