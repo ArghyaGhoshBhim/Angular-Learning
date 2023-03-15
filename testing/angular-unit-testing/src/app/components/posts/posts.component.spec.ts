@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { Post } from 'src/app/models/Post';
 import { PostService } from 'src/app/services/Post/post.service';
+import { PostComponent } from '../post/post.component';
 import { PostsComponent } from './posts.component';
 
 describe('PostsComponent', () => {
@@ -92,5 +93,52 @@ describe('PostsComponent', () => {
         expect(post).not.toEqual(POSTS[1]);
       }
     });
+  });
+});
+
+describe('deep integration testing ', () => {
+  let POSTS: any;
+  let mockPostService: any;
+  let postsComponent: PostsComponent;
+  let fixture: ComponentFixture<PostsComponent>;
+  beforeEach(() => {
+    POSTS = [
+      {
+        id: 1,
+        title: 'title 1',
+        body: 'body 1',
+      },
+      {
+        id: 2,
+        title: 'title 2',
+        body: 'body 2',
+      },
+      {
+        id: 3,
+        title: 'title 3',
+        body: 'body 3',
+      },
+    ];
+
+    mockPostService = jasmine.createSpyObj('PostService', [
+      'getPosts',
+      'deletePost',
+    ]);
+
+    TestBed.configureTestingModule({
+      declarations: [PostsComponent, PostComponent],
+      providers: [{ provide: PostService, useValue: mockPostService }],
+    });
+
+    fixture = TestBed.createComponent(PostsComponent);
+    postsComponent = fixture.componentInstance;
+  });
+
+  it('should create same app-post component with posts', () => {
+    mockPostService.getPosts.and.returnValue(of(POSTS));
+    fixture.detectChanges();
+    let debugElement = fixture.debugElement;
+    let postElement = debugElement.queryAll(By.css('.posts'));
+    expect(postElement.length).toBe(POSTS.length);
   });
 });
