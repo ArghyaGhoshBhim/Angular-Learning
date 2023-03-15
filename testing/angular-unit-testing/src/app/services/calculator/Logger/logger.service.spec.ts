@@ -1,3 +1,4 @@
+import { TestBed } from '@angular/core/testing';
 import { LoggerService } from './logger.service';
 /** 
 describe('LoggerService', () => {
@@ -31,3 +32,37 @@ describe('LoggerService', () => {
   });
 });
 */
+
+describe('LoggerService using TestBed', () => {
+  let loggerService: LoggerService;
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [LoggerService],
+    });
+    loggerService = TestBed.inject(LoggerService);
+  });
+  it('should not have any message initially', () => {
+    let result = loggerService.message.length;
+    expect(result).toBe(0);
+  });
+
+  it('should add the message when the log is called', () => {
+    //arrange
+    //let loggerService=new LoggerService();
+
+    //act
+    loggerService.log('message');
+    //assert
+    expect(loggerService.message.length).toBe(1);
+  });
+  it('should clear all the messages when clear method call', () => {
+    //arrange
+    //let loggerService=new LoggerService();
+    loggerService.log('message');
+
+    //act
+    loggerService.clear();
+    //assert
+    expect(loggerService.message.length).toBe(0);
+  });
+});
