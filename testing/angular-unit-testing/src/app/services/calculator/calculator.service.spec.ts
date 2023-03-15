@@ -8,7 +8,8 @@ describe('CalculatorService', () => {
    * With out using mocking and spying
    * it is too much expensive operation.
    */
-  /*
+
+  /** 
   it('should add two numbers', () => {
     let loggerService = new LoggerService();
     const calculatorService = new CalculatorService(loggerService);
@@ -21,12 +22,12 @@ describe('CalculatorService', () => {
     let result = calculatorService.subtract(2, 3);
     expect(result).toBe(-1);
   });
-  */
-
+*/
   /**
    * Using Spying
    * It will spying the log method in the loggerService
    */
+
   /*
   it('should add two numbers', () => {
     let loggerService = new LoggerService();
@@ -45,12 +46,11 @@ describe('CalculatorService', () => {
     expect(result).toBe(-1);
     expect(loggerService.log).toHaveBeenCalledTimes(1);
   });
-  */
-
+*/
   /**
    * Mocking LoginService
    */
-  /** 
+
   it('should add two numbers', () => {
     let mockLoggerService = jasmine.createSpyObj('LoggerService', ['log']);
     const calculatorService = new CalculatorService(mockLoggerService);
@@ -66,14 +66,13 @@ describe('CalculatorService', () => {
     expect(result).toBe(-1);
     expect(mockLoggerService.log).toHaveBeenCalledTimes(1);
   });
-
-  */
 
   //********************BEFOR EACH METHOD******************** */
   /**
    *
    */
 
+  /*
   let mockLoggerService: LoggerService;
   let calculatorService: CalculatorService;
   beforeEach(() => {
@@ -95,4 +94,5 @@ describe('CalculatorService', () => {
     expect(result).toBe(-1);
     expect(mockLoggerService.log).toHaveBeenCalledTimes(1);
   });
+  */
 });
