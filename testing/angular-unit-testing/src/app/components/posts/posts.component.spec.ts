@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { PostService } from 'src/app/services/Post/post.service';
 import { PostsComponent } from './posts.component';
@@ -7,6 +7,7 @@ describe('PostsComponent', () => {
   let POSTS: any;
   let mockPostService: any;
   let postsComponent: PostsComponent;
+  let fixture: ComponentFixture<PostsComponent>;
 
   beforeEach(() => {
     POSTS = [
@@ -41,13 +42,19 @@ describe('PostsComponent', () => {
     ]);
 
     TestBed.configureTestingModule({
-      providers: [
-        PostsComponent,
-        { provide: PostService, useValue: mockPostService },
-      ],
+      declarations: [PostsComponent],
+      providers: [{ provide: PostService, useValue: mockPostService }],
     });
 
-    postsComponent = TestBed.inject(PostsComponent);
+    //postsComponent = TestBed.inject(PostsComponent);
+
+    fixture = TestBed.createComponent(PostsComponent);
+    postsComponent = fixture.componentInstance;
+  });
+  it('should set posts from the service directly', () => {
+    mockPostService.getPosts.and.returnValue(of(POSTS));
+    postsComponent.ngOnInit();
+    expect(postsComponent.posts.length).toBe(3);
   });
 
   describe('delete', () => {
