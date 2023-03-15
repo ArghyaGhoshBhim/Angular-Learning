@@ -1,5 +1,7 @@
+import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
+import { Post } from 'src/app/models/Post';
 import { PostService } from 'src/app/services/Post/post.service';
 import { PostsComponent } from './posts.component';
 
@@ -8,7 +10,13 @@ describe('PostsComponent', () => {
   let mockPostService: any;
   let postsComponent: PostsComponent;
   let fixture: ComponentFixture<PostsComponent>;
-
+  @Component({
+    selector: 'app-post',
+    template: '<div></div>',
+  })
+  class FakePostComponent {
+    @Input() post!: Post;
+  }
   beforeEach(() => {
     POSTS = [
       {
@@ -42,7 +50,7 @@ describe('PostsComponent', () => {
     ]);
 
     TestBed.configureTestingModule({
-      declarations: [PostsComponent],
+      declarations: [PostsComponent, FakePostComponent],
       providers: [{ provide: PostService, useValue: mockPostService }],
     });
 
