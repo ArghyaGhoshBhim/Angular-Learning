@@ -141,4 +141,16 @@ describe('deep integration testing ', () => {
     let postElement = debugElement.queryAll(By.css('.posts'));
     expect(postElement.length).toBe(POSTS.length);
   });
+
+  it('should check whether exact post is sending to the PostCmponent', () => {
+    mockPostService.getPosts.and.returnValue(of(POSTS));
+    fixture.detectChanges();
+    let debugElement = fixture.debugElement;
+    let postComponents = debugElement.queryAll(By.directive(PostComponent));
+    for (let i = 0; i < POSTS.length; i++) {
+      let postComponentInstance = postComponents[i]
+        .componentInstance as PostComponent;
+      expect(postComponentInstance.post.title).toEqual(POSTS[i].title);
+    }
+  });
 });
