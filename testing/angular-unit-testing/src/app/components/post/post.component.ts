@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Post } from 'src/app/models/Post';
 
 @Component({
   selector: 'app-post',
@@ -6,10 +7,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./post.component.scss'],
 })
 export class PostComponent {
-  @Input() post: any;
-  @Output() delete = new EventEmitter<void>();
+  @Input() post!: Post;
+  @Output() delete = new EventEmitter<Post>();
   onDelete(event: Event) {
     event.stopPropagation();
-    this.delete.emit();
+    this.delete.emit(this.post);
   }
 }
